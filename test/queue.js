@@ -10,12 +10,12 @@ describe('Queue Module', function () {
     generate = (time) => () => new Promise(resolve => setTimeout(() => {
       console.log(`Promise log: ${time} is done`);
       resolve(time);
-    }, time * 1000));
+    }, time * 10));
 
     generateError = (time) => () => new Promise((resolve, reject) => setTimeout(() => {
       console.log(`Promise error log: ${time} is done`);
       reject(new Error(`error ${time}`));
-    }, time * 1000));
+    }, time * 10));
 
   });
 
