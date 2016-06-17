@@ -143,7 +143,7 @@ export default class Queue {
    * @param clear {boolean} Clear this object @see clear.
    * @returns {Promise} Promise object that will resolved with an array of succeeds results.
    */
-  drain(succeed = false, clear = true) {
+  drain(succeed = false, clear = true, errCb) {
     const q = this;
 
     if (q.tasks < 1) {
@@ -160,7 +160,7 @@ export default class Queue {
             if (!succeed && errs.length > 0) return reject(errs[0]);
 
             if (succeed) {
-              errs.forEach(err => console.error(err));
+              if (typeof errCb === 'function') errCb(errs);
               resolve(res.filter(result => !(result instanceof Error)));
             } else {
               resolve(res);
