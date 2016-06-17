@@ -11,7 +11,7 @@ describe('Task Module', function () {
     generate = (time, identifier) => {
 
       const func = () => new Promise(resolve => setTimeout(() => {
-        console.log(`Promise log: ${time} is done`);
+        // console.log(`Promise log: ${time} is done`);
         resolve(time);
       }, time * 100));
 
