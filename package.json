@@ -4,7 +4,7 @@
   "description": "Promise based queue with rich API.",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test _mocha -u tdd -r babel-register --timeout 60000 ./test/bootstrap.js ./test/*.test.js",
+    "test": "NODE_ENV=test _mocha -u tdd -r babel-register --timeout 10000 ./test/bootstrap.js ./test/*.test.js",
     "build": "babel src -d lib"
   },
   "repository": {
