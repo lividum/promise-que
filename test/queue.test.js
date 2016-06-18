@@ -237,7 +237,8 @@ describe('Queue Module', function() {
         // run 1 concurrent async, 10 + 20 + 30 + (3*100)
         (endTime - startTime).should.be.at.least(360);
         done();
-      });
+      })
+      .catch(done);
 
   });
 
@@ -260,7 +261,8 @@ describe('Queue Module', function() {
         // run 1 concurrent async, 10 + 20 + 30 + 10 + 10 + (5*100)
         (endTime - startTime).should.be.at.least(580);
         done();
-      });
+      })
+      .catch(done);
 
   });
 
@@ -283,7 +285,8 @@ describe('Queue Module', function() {
         // run 1 concurrent async, 20 + 30 + 200
         (endTime - startTime).should.be.at.least(230);
         done();
-      });
+      })
+      .catch(done);
 
   });
 
@@ -306,7 +309,8 @@ describe('Queue Module', function() {
         // run 1 concurrent async, 20 + 10 + 200
         (endTime - startTime).should.be.at.least(230);
         done();
-      });
+      })
+      .catch(done);
 
   });
 
