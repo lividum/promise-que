@@ -245,7 +245,7 @@ describe('Queue Module', function() {
         const endTime = new Date().getTime();
 
         // run 1 concurrent async, 10 + 20 + 30 + (3*100)
-        (endTime - startTime).should.be.at.least(300);
+        (endTime - startTime).should.be.at.least(200);
         done();
       })
       .catch(done);
