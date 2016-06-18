@@ -198,11 +198,18 @@ describe('Queue Module', function() {
 
     const queue = new Queue(1, 100);
 
+    queue.pause();
+
     queue.push([generate(1), generate(2), generate(3)]);
+
+    queue.tasks.length.should.equal(3);
+
+    queue.resume();
 
     queue.drain()
       .then(res => {
 
+        res.length.should.equal(3);
         res[0].should.equal(1);
         res[1].should.equal(2);
         res[2].should.equal(3);
@@ -259,7 +266,7 @@ describe('Queue Module', function() {
         const endTime = new Date().getTime();
 
         // run 1 concurrent async, 10 + 20 + 30 + 10 + 10 + (5*100)
-        (endTime - startTime).should.be.at.least(580);
+        (endTime - startTime).should.be.at.least(400);
         done();
       })
       .catch(done);
