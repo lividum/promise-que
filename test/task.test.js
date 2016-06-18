@@ -27,13 +27,17 @@ describe('Task Module', function () {
 
   });
 
+  it('test generate hash result', function(){
+    (Task.generateHash() === Task.generateHash()).should.not.equal(true);
+  });
+
   it('should be able to push task instead of function', function (done) {
 
     const queue = new Queue(5, 100);
 
     queue.pause();
 
-    queue.push([generate(1), generate(3), generate(2)]);
+    queue.push([generate(1, 'a'), generate(3, 'b'), generate(2, 'c')]);
 
     queue.tasks.length.should.equal(3);
     queue.running.should.equal(0);
