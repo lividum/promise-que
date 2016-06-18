@@ -5,6 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "NODE_ENV=test _mocha -u tdd -r babel-register --timeout 10000 ./test/bootstrap.js ./test/*.test.js",
+    "coverage": "NODE_ENV=test istanbul cover _mocha -- -u tdd -r babel-register --timeout 10000 ./test/bootstrap.js ./test/*.test.js",
+    "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
     "build": "babel src -d lib"
   },
   "repository": {

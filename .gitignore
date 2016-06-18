@@ -29,6 +29,9 @@ build/Release
 # Transpiled ES5
 lib
 
+# Coveralls API Token
+.coveralls.yml
+
 # Dependency directories
 node_modules
 jspm_packages
