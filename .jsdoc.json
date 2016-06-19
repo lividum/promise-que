@@ -1,0 +1,6 @@
+{
+  "source": {
+    "include": ["src"],
+    "excludePattern": "node_modules"
+  }
+}

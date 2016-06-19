@@ -6,9 +6,12 @@
   "scripts": {
     "test": "NODE_ENV=test _mocha -u tdd -r babel-register --timeout 10000 ./test/bootstrap.js ./test/*.test.js",
     "coverage": "NODE_ENV=test istanbul cover _mocha -- -u tdd -r babel-register --timeout 10000 ./test/bootstrap.js ./test/*.test.js",
+    "docs:server": "cd coverage && hostr",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
     "build": "babel src -d lib",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "docs": "rm -rf docs && jsdoc -c .jsdoc.json -r -d docs --readme README.md",
+    "docs:server": "cd docs && hostr"
   },
   "repository": {
     "type": "git",

@@ -32,6 +32,9 @@ lib
 # Coveralls API Token
 .coveralls.yml
 
+# generated documentation
+docs
+
 # Dependency directories
 node_modules
 jspm_packages
