@@ -1,15 +1,13 @@
 import Queue from '../src/queue';
 import Task from '../src/task';
 
-describe('Task Module', function () {
+describe('Task Module', () => {
+  let generate;
+  let startTime;
 
-  let generate, generateError, startTime;
-
-  before(function () {
-
+  beforeEach(() => {
     // helper for generate function that return Promise
     generate = (time, identifier) => {
-
       const func = () => new Promise(resolve => setTimeout(() => {
         // console.log(`Promise log: ${time} is done`);
         resolve(time);
@@ -17,22 +15,20 @@ describe('Task Module', function () {
 
       return new Task(func, identifier);
     };
-
-  });
-
-  beforeEach(function () {
-
     // starting time
     startTime = new Date().getTime();
-
   });
 
-  it('test generate hash result', function(){
+  afterEach(() => {
+    generate = null;
+    startTime = null;
+  });
+
+  it('test generate hash result', () => {
     (Task.generateHash() === Task.generateHash()).should.not.equal(true);
   });
 
-  it('should be able to push task instead of function', function (done) {
-
+  it('should be able to push task instead of function', (done) => {
     const queue = new Queue(5, 100);
 
     queue.pause();
@@ -49,17 +45,15 @@ describe('Task Module', function () {
     queue.done.should.equal(0);
 
     Promise.all(queue.promises).then(res => {
-
       res[0].should.equal(1);
       res[1].should.equal(3);
       res[2].should.equal(2);
       queue.done.should.equal(3);
 
-      queue.drain().then(res => {
-
-        res[0].should.equal(1);
-        res[1].should.equal(3);
-        res[2].should.equal(2);
+      queue.drain().then(res2 => {
+        res2[0].should.equal(1);
+        res2[1].should.equal(3);
+        res2[2].should.equal(2);
         queue.done.should.equal(0);
 
         const endTime = new Date().getTime();
@@ -68,13 +62,10 @@ describe('Task Module', function () {
         (endTime - startTime).should.be.greaterThan(130);
         done();
       });
-
     });
-
   });
 
-  it('should be able to ditch duplicated task', function(done){
-
+  it('should be able to ditch duplicated task', (done) => {
     const queue = new Queue(1, 100);
 
     queue.pause();
@@ -85,8 +76,8 @@ describe('Task Module', function () {
 
     queue.resume();
 
-    Promise.all(queue.promises).then(res => {
-      queue.drain().then(res => {
+    Promise.all(queue.promises).then(() => {
+      queue.drain().then(() => {
         queue.done.should.equal(0);
 
         const endTime = new Date().getTime();
@@ -94,11 +85,7 @@ describe('Task Module', function () {
         // run 1 concurrent async, higher (20) must be taken + 100 delay
         (endTime - startTime).should.be.greaterThan(120);
         done();
-
       });
-
     });
-
   });
-
 });

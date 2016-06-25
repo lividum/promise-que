@@ -1,11 +1,10 @@
 import Bluebird from 'bluebird';
+import { assert, should, expect } from 'chai';
 
-before(function () {
-
-  global.assert = require('chai').assert;
-  global.should = require('chai').should();
-  global.expect = require('chai').expect;
+before(() => {
+  global.assert = assert;
+  global.should = should();
+  global.expect = expect;
 
   if (typeof global.Promise === 'undefined') global.Promise = Bluebird;
-
 });
