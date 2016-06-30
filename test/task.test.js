@@ -24,8 +24,8 @@ describe('Task Module', () => {
     startTime = null;
   });
 
-  it('test generate hash result', () => {
-    (Task.generateHash() === Task.generateHash()).should.not.equal(true);
+  it('call random hash result twice and the result must not same each other', () => {
+    (Task.randomHash() === Task.randomHash()).should.not.equal(true);
   });
 
   it('should be able to push task instead of function', (done) => {
