@@ -48,9 +48,9 @@ describe('Queue Module', () => {
         queue.done.should.equal(3);
 
         queue.drain().then(() => {
-          // res[0].should.equal(1);
-          // res[1].should.equal(3);
-          // res[2].should.equal(2);
+          res[0].should.equal(1);
+          res[1].should.equal(3);
+          res[2].should.equal(2);
           queue.done.should.equal(0);
 
           const endTime = new Date().getTime();
@@ -113,11 +113,11 @@ describe('Queue Module', () => {
     queue.drain()
       .then(res => {
         res.length.should.equal(5);
-        // res[0].should.equal(1);
-        // res[1].should.equal(3);
-        // res[2].should.equal(2);
-        // res[3].should.equal(1);
-        // res[4].should.equal(2);
+        res[0].should.equal(1);
+        res[1].should.equal(3);
+        res[2].should.equal(2);
+        res[3].should.equal(1);
+        res[4].should.equal(2);
         queue.done.should.equal(0);
 
         const endTime = new Date().getTime();
@@ -129,7 +129,7 @@ describe('Queue Module', () => {
       .catch(done);
   });
 
-  it(`should be able to handle spammed tasks and still consistent with number of worker`, (done) => {
+  it('should be able to handle spammed tasks and have consistent result', (done) => {
     const queue = new Queue(3, 100);
 
     queue.push([
@@ -157,33 +157,31 @@ describe('Queue Module', () => {
     ]);
 
     queue.drain()
-      .then(() => {
-        // TODO: this is very inconsistent
-        // res.length.should.equal(17);
-        // TODO: this still inconsistent:
-        // sometimes 2 at 10 sometimes at 11, because number of worker is 2
-        // res[0].should.equal(1);
-        // res[1].should.equal(1);
-        // res[2].should.equal(1);
-        //
-        // res[3].should.equal(1);
-        // res[4].should.equal(1);
-        // res[5].should.equal(1);
-        //
-        // res[6].should.equal(1);
-        // res[7].should.equal(1);
-        // res[8].should.equal(1);
+      .then(res => {
+        res.length.should.equal(17);
 
-        // res[9].should.equal(1);
-        // res[10].should.equal(1);
-        // res[11].should.equal(2);
-        //
-        // res[12].should.equal(1);
-        // res[13].should.equal(1);
-        // res[14].should.equal(1);
-        //
-        // res[15].should.equal(1);
-        // res[16].should.equal(1);
+        res[0].should.equal(1);
+        res[1].should.equal(1);
+        res[2].should.equal(1);
+
+        res[3].should.equal(1);
+        res[4].should.equal(1);
+        res[5].should.equal(1);
+
+        res[6].should.equal(1);
+        res[7].should.equal(1);
+        res[8].should.equal(1);
+
+        res[9].should.equal(1);
+        res[10].should.equal(1);
+        res[11].should.equal(2);
+
+        res[12].should.equal(1);
+        res[13].should.equal(1);
+        res[14].should.equal(1);
+
+        res[15].should.equal(1);
+        res[16].should.equal(1);
 
         queue.done.should.equal(0);
 
@@ -211,9 +209,9 @@ describe('Queue Module', () => {
     queue.drain()
       .then(res => {
         res.length.should.equal(3);
-        // res[0].should.equal(1);
-        // res[1].should.equal(2);
-        // res[2].should.equal(3);
+        res[0].should.equal(1);
+        res[1].should.equal(2);
+        res[2].should.equal(3);
         queue.done.should.equal(0);
 
         const endTime = new Date().getTime();
@@ -294,7 +292,7 @@ describe('Queue Module', () => {
       .catch(done);
   });
 
-  it(`should be able to handle rejected Promise that thrown not an error function`, (done) => {
+  it('should be able to handle rejected Promise that thrown not an error function', (done) => {
     const queue = new Queue(2, 100);
 
     queue.push([
