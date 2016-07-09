@@ -174,7 +174,7 @@ export default class Queue {
     } else {
       promise = new Promise(resolve => {
         setTimeout(() => {
-          resolve(q.drain(succeed, clear));
+          resolve(q.drain(succeed, clear, errCb));
         }, q.loopDelay);
       });
     }
