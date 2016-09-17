@@ -1,4 +1,5 @@
 import Task from './task';
+import id from './identifier';
 
 export default class Queue {
 
@@ -42,6 +43,9 @@ export default class Queue {
     this.running = 0;
     this.done = 0;
     if (typeof global.gc === 'function' && forceGc === true) global.gc();
+
+    // clear count on default identifier
+    id.clear();
   }
 
   addRunning(number) {
